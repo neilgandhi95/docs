@@ -25,67 +25,32 @@
     "name": "Login",
     "url": "https://www.send.co/"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "Talk to Neil",
+      "icon": "linkedin",
+      "url": "https://www.linkedin.com/in/gandhineil/"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Send 101",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "Send101/introduction",
+        "Send101/identify",
+        "Send101/track",
+        "Send101/links",
+        "Send101/replace"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Use Cases",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "Examples/Lead-magnets"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+    "linkedin": "https://www.linkedin.com/company/send-co/"
   }
 }
