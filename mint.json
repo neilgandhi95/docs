@@ -46,7 +46,10 @@
     {
       "group": "Use Cases",
       "pages": [
-        "Examples/Lead-magnets"
+        "Examples/sales",
+        "Examples/Lead-magnets",
+        "Examples/deck",
+        "Examples/webinar"
       ]
     }
   ],
