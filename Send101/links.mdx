@@ -3,7 +3,6 @@ title: "Personalized links"
 description: "Know who's viewing your content without asking for their information."
 ---
 
-![Custom Links Pn](/images/Custom-Links.png)
 
 ## Why use Personalized Links?
 
@@ -31,16 +30,21 @@ You can then add any custom prefix to create personalized links:
   <Step title="Personalize your link">
     Add unique identifiers - whether it's for specific people (like 'Neil'), campaigns ('Q1-launch'), channels ('linkedin'), or any other way you want to segment your tracking.
 
-    ![Gated Content Pn](/images/Gated-content.png)
+    ![Customizeyourlink Pn](/images/Customizeyourlink.png)
+
+    <Info>
+      You cand add as many personalized links as you need.
+    </Info>
+    Now copy your new link and share it.
   </Step>
   <Step title="Example of tracking using links">
-    This is the magic: the viewer is shown as 'Anonymous', but you actually know it's `Neil from San Francisco`who spent `1m 44s`  going through your slides.
-
-    All without asking for a single piece of information.
-
-    ![Analyticsanddata Pn](/images/Analyticsanddata.png)
+    ![Analyticsanddatabylink Pn](/images/Analyticsanddatabylink.png)
   </Step>
 </Steps>
+
+This is the magic: the viewer is shown as 'Anonymous', but you actually know it's `Neil from San Francisco`who spent `1m 44s`  going through your slides.
+
+All without asking for a single piece of information.
 
 ### **Personalized Links Example:**
 
@@ -56,8 +60,93 @@ You can then add any custom prefix to create personalized links:
 
 ![Example Channel Pn](/images/Example-Channel.png)
 
-## How to create personalized links in bulk?
+## How to create personalized links in bulk? 
+
+If you want to create a few links, then doing it directly in Send is perfect. But if you want to create hundreds or thousands of custom links, then LLMs or Google Sheets are the best alternative. 
 
 ### Use LLMs: ChatGPT, Claude, etc
 
-### Create personalized links in Google Sheets / Excel
+<AccordionGroup>
+  <Accordion title="Prompt for LLMs" description="Copy and paste this in ChatGPT, Claude, Gemini, etc to customize your links at scale" icon="sparkles">
+    Your task is to generate personalized `send.co` links in bulk, optionally including autofill variables. You will be provided with a base `send.co` link, a list of desired source identifiers, and potentially a list of variable placeholders to include.
+
+    **Here's the structure of the **`send.co`**link:** 
+
+    - **Base URL:** `https://www.send.co/a/`
+    - **Unique ID:** This is a string of characters that appears _after_ a hyphen (`-`) in the original link (e.g., `ols48c5e` in `https://www.send.co/a/ols48c5e`). This unique ID **must remain unchanged** in all generated links.
+    - **Custom Source Identifier:** This is a string you will insert _before_ the hyphen and the unique ID. This allows us to track the source of the click.
+    - **Autofill Variables (Optional):** These are query parameters appended to the link, using the format `?key={{placeholder}}&key2={{placeholder2}}`. Common placeholders are `{{name}}`, `{{email}}`, `{{phone}}`, etc. These placeholders will be automatically filled by the `send.co` platform when the link is clicked.
+
+    **Your process should be as follows:**
+
+    1. **Identify the Base Link and Unique ID:** When given an original link (e.g., `https://www.send.co/a/ols48c5e` or `https://www.send.co/a/ols48c5e?name={{name}}`), extract the unique ID (`ols48c5e`). The base part of the link is always `https://www.send.co/a/`. If the original link _already contains_ autofill parameters, you should capture those parameters to append them to the new links.
+    2. **Receive Source Identifiers:** You will be given a list of words or phrases that should be used as the custom source identifiers (e.g., `linkedin`, `email-campaign-q2`, `twitter-promo`).
+    3. **Receive Autofill Parameters (if any):** You will be told which autofill parameters to include. For example, `name={{name}}&email={{email}}`. If no parameters are specified or extracted from the original link, do not add them.
+    4. **Construct the Personalized Link:** For each source identifier, create a new link by combining these parts:
+       - `https://www.send.co/a/`
+       - `[custom-source-identifier]` (in lowercase, hyphens for spaces)
+       - `-` (hyphen separator)
+       - `[unique-ID]`
+       - `?[autofill-parameters]` (if applicable, starting with `?` for the first parameter, `&` for subsequent ones)
+
+       **Format:** `https://www.send.co/a/[custom-source-identifier]-[unique-ID]?[autofill-parameters]`
+       - Ensure the `[custom-source-identifier]` is in lowercase and uses hyphens for spaces if it's a phrase (e.g., `email campaign q2` becomes `email-campaign-q2`).
+       - The hyphen (`-`) separating the custom identifier and the unique ID is crucial.
+       - If autofill parameters are provided, append them after a `?`. If there are multiple parameters, separate them with `&`.
+    5. **Output Format:** Present the generated links as a clear, bulleted list or a table, with each personalized link on a new line.
+
+    **Examples:**
+
+    **Scenario 1: Personalization with Source, No Autofill**
+
+    - **Original Link Provided:** `https://www.send.co/a/ols48c5e`
+    - **Source Identifiers Provided:** `linkedin`, `facebook-group`
+    - **Autofill Parameters:** None
+    - **Expected Output:**
+      - `https://www.send.co/a/linkedin-ols48c5e`
+      - `https://www.send.co/a/facebook-group-ols48c5e`
+
+    **Scenario 2: Personalization with Source and Autofill**
+
+    - **Original Link Provided:** `https://www.send.co/a/ols48c5e`
+    - **Source Identifiers Provided:** `email-promo`, `website-banner`
+    - **Autofill Parameters to add:** `name={{name}}&email={{email}}`
+    - **Expected Output:**
+      - `https://www.send.co/a/email-promo-ols48c5e?name={{name}}&email={{email}}`
+      - `https://www.send.co/a/website-banner-ols48c5e?name={{name}}&email={{email}}`
+
+    **Scenario 3: Original Link Already Contains Autofill and Needs Source Added**
+
+    - **Original Link Provided:** `https://www.send.co/a/ols48c5e?phone={{phone}}`
+    - **Source Identifiers Provided:** `sms-blast`, `app-notification`
+    - **Autofill Parameters:** Use existing `phone={{phone}}` from the original link.
+    - **Expected Output:**
+      - `https://www.send.co/a/sms-blast-ols48c5e?phone={{phone}}`
+      - `https://www.send.co/a/app-notification-ols48c5e?phone={{phone}}`
+
+    **Important Considerations:**
+
+    - **Case Sensitivity:** Convert all custom source identifiers to lowercase before inserting them into the link.
+    - **Special Characters:** If a source identifier contains spaces or other special characters, replace them with hyphens (`-`). Avoid other special characters that might break a URL.
+    - **Accuracy:** Double-check that the unique ID from the original link is perfectly preserved in each generated link. Also, ensure autofill parameters are correctly appended, starting with `?` and using `&` for subsequent ones.
+    - **Bulk Processing:** Be ready to handle long lists of source identifiers and generate all corresponding links efficiently.
+    - **Parameter Order:** The order of autofill parameters does not strictly matter, but maintaining the order provided (if any) is good practice.
+  </Accordion>
+</AccordionGroup>
+
+### Fastest way: use our GPT to create links in bulk
+
+<Info>
+  When you use this GPT, all the data is yours, and we won't be able to see anything. 
+</Info>
+
+Our [personalized link generator](https://chatgpt.com/g/g-6834a7a8b94481919419b3bd048c64fa-personalized-link-generator-send) creates custom tracking links in bulk. Just paste your Send link and list who you want to track - people, campaigns, channels, whatever.
+
+ We'll generate all the personalized links for you.
+
+<img
+  src="/images/CustomGPT.png"
+  alt="Custom GPT Pn"
+  title="Custom GPT Pn"
+  style={{ width:"73%" }}
+/>
