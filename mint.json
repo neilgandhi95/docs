@@ -33,26 +33,28 @@
     }
   ],
   "navigation": [
-    {
-      "group": "Send 101",
-      "pages": [
-        "Send101/introduction",
-        "Send101/identify",
-        "Send101/track",
-        "Send101/links",
-        "Send101/replace"
-      ]
-    },
-    {
-      "group": "Use Cases",
-      "pages": [
-        "Examples/sales",
-        "Examples/Lead-magnets",
-        "Examples/deck",
-        "Examples/webinar"
-      ]
-    }
-  ],
+  {
+    "group": "Send 101",
+    "icon": "book-open",
+    "pages": [
+      "Send101/introduction",
+      "Send101/identify",
+      "Send101/track",
+      "Send101/links",
+      "Send101/replace"
+    ]
+  },
+  {
+    "group": "Use Cases",
+    "icon": "lightbulb",
+    "pages": [
+      "Examples/sales",
+      "Examples/Lead-magnets",
+      "Examples/deck",
+      "Examples/webinar"
+    ]
+  }
+],
   "footerSocials": {
     "linkedin": "https://www.linkedin.com/company/send-co/"
   }
