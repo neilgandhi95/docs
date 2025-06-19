@@ -1,0 +1,171 @@
+---
+title: "Automate anything using Webhooks"
+description: "A webhook is a way to automatically send data to other tools and systems when specific events happen in send.co.ile."
+---
+
+It's like subscribing to a service and getting notified whenever something happens.
+
+![Webhooks and automations.png](/images/Webhooksandautomations.png)
+
+When someone interacts with your content (views a page, downloads a file, etc.), [send.co](http://send.co) immediately sends that information to any tool you've connected via webhook.
+
+## How to use Webhooks
+
+1. **In **[**send.co**](http://send.co)**:** Click 'Add Webhook'
+
+   ![Add a Webhook - Step 1.png](/images/AddaWebhook-Step1.png)
+2. **In your automation tool:**
+
+- Open your chosen tool (Zapier, Make, etc.)
+- Look for "Webhook" or "HTTP Request" trigger
+
+![Add a Webhook - Step 2.png](/images/AddaWebhook-Step2.png)
+
+<Info>
+  **Note:** not all tools offer the Webhooks feature for free.
+
+  If you’re just getting started, [Relay.app](http://Relay.app) is a great alternative that lets you create AI-powered workflows for free.
+</Info>
+
+3. When setting up your webhook, make sure to select “POST” as the method so your information is sent correctly.
+
+![Add a Webhook - Step 3.png](/images/AddaWebhook-Step3.png)
+
+4. Copy the webhook URL
+
+![Add a Webhook - Step 4.png](/images/AddaWebhook-Step4.png)
+
+**5. Back in **[**send.co**](http://send.co)**:** Paste the webhook URL into the Endpoint field
+
+![Add a Webhook - Step 5.png](/images/AddaWebhook-Step5.png)
+
+6. Click ‘Test webhook’ to send a test event to confirm everything is working
+
+![Add a Webhook - Step 6.png](/images/AddaWebhook-Step6.png)
+
+You should then see the data appear in your tool.
+
+![Add a Webhook - Step 8.png](/images/AddaWebhook-Step8.png)
+
+8. Click ‘Create Webhook’
+
+![Add a Webhook - Step 8.png](/images/AddaWebhook-Step8.png)
+
+> **Note:** We send a separate event for each file you have. If you want to focus on a specific file, you can add a filter in your workflow to handle just the files you're interested in. This is useful when you only want to process or respond to certain files.
+
+## What data is sent in Webhooks
+
+When someone interacts with your [send.co](http://send.co) content, we automatically send the following information:
+
+**Event Information:**
+
+- Event type (e.g., "linkViewed")
+- Timestamp of when the action occurred
+
+**Viewer Details:**
+
+- Name (when available)
+- Email address (when available)
+- Phone number (when available)
+
+**Location Data:**
+
+- Country
+- Region/State
+- City
+
+**Device Information:**
+
+- Device type (Desktop, Mobile, Tablet)
+- Browser (Chrome, Safari, Firefox, etc.)
+- Operating system (macOS, Windows, iOS, Android)
+
+**Link Details:**
+
+- Link ID (unique identifier)
+- [send.co](http://send.co) link URL
+- Original document URL
+
+---
+
+The data is sent in a format called JSON, which stands for JavaScript Object Notation.
+
+JSON is simply a way to organize information so that computers and different apps can easily read and use it. Each piece of information, such as the viewer’s name, location, or device type, is clearly labeled and grouped together.
+
+**Here’s an example of what the data looks like for a “link viewed” event:**
+
+```json
+"event": "linkViewed",
+"timestamp": "2024-03-20T10:30:00Z",
+"data": {
+"viewer": {
+"name": "Neil Gandhi",
+"email": "neil@paage.io",
+"phone": "+1234567890"
+},
+"location": {
+"country": "United States",
+"region": "California",
+"city": "San Francisco"
+},
+"device": {
+"type": "Desktop",
+"browser": "Chrome",
+"os": "macOS"
+},
+"linkId": "abc123",
+"linkUrl": "<https://www.send.co/a/abc123>",
+"originalUrl": "<https://docs.google.com/proposal>"
+}
+}
+```
+
+**Coming soon:** Webhooks will also include viewing time data, showing how long each person spent reading your document.
+
+## Examples of what you can do with webhooks:
+
+![Webhook - Send.png](/images/Webhook-Send.png)
+
+<Check>
+  **Common examples:**
+
+  - Automatically send lead information to your CRM when someone views or downloads your content
+  - Trigger targeted email sequences based on how people interact with your documents
+  - Update spreadsheets with engagement data in real-time
+  - Create custom workflows in automation tools (Zapier, Make, N8N, Clay, Relay, etc.) that respond to specific user actions
+</Check>
+
+### **Lead Management:**
+
+- Automatically add new contacts to your CRM when someone views your document
+- Score leads based on which documents they interact with
+- Trigger follow-up sequences for prospects who engage with specific content
+
+### **Sales Automation:**
+
+- Send personalized emails when someone opens your proposal
+- Update deal stages or properties in your CRM based on document engagement
+
+### **Marketing Workflows:**
+
+- Add engaged viewers to targeted email campaigns
+- Create custom audiences in Facebook Ads based on document interactions
+- Track content performance across multiple marketing channels
+
+### **Customer Success:**
+
+- Alert your support team when customers access help documentation
+- Trigger onboarding sequences when new users download getting-started guides
+- Monitor which resources customers find most valuable
+
+### **Data & Analytics:**
+
+- Send engagement data to Google Sheets for custom reporting
+- Feed document metrics into your business intelligence dashboard
+- Combine viewing data with other customer touchpoints for complete journey mapping
+
+### **Team Notifications:**
+
+- Get Slack alerts when important documents are accessed
+- Notify account managers when their clients engage with new content
+- Track internal document usage across departments
