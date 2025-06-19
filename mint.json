@@ -41,7 +41,7 @@
       "Send101/identify",
       "Send101/track",
       "Send101/links",
-       "Send101/ai",
+       "Send101/AI",
        "Send101/automations",
       "Send101/replace"
     ]
